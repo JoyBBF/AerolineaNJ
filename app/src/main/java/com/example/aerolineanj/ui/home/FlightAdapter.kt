@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aerolineanj.ClickListener
 import com.example.aerolineanj.R
@@ -11,8 +12,8 @@ import com.example.aerolineanj.data.model.Flight
 import kotlinx.android.synthetic.main.item_flight.view.*
 
 
-class FlightAdapter(list: ArrayList<Flight>, var clickListener: ClickListener): RecyclerView.Adapter<FlightAdapter.ViewHolder>() {
-
+class FlightAdapter(val list: ArrayList<Flight>, var clickListener: ClickListener): RecyclerView.Adapter<FlightAdapter.ViewHolder>() {
+    /*
     var listAplications: ArrayList<Flight>? = null
     var auxList: ArrayList<Flight>? = null
     private var recyclerViewClickInterface: ClickListener? = null
@@ -23,69 +24,83 @@ class FlightAdapter(list: ArrayList<Flight>, var clickListener: ClickListener): 
         this.listAplications = list
         this.auxList = list
     }
-
+    */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.tvname!!.setText(
-            listAplications!!.get(position).firstName.toString() + " " + listAplications!!.get(
-                position
-            ).lastName
+        /*
+        holder.tvDestination!!.setText(
+            listAplications!!.get(position).schedule.route.destination
         )
-        holder.tvState!!.setText(listAplications!!.get(position).state)
-        holder.tvStartDay!!.setText(listAplications!!.get(position).date)
-        holder.tvPosition!!.setText(listAplications!!.get(position).position)
-        holder.tvPhone!!.setText(
-            "+" + listAplications!!.get(position).areaCode
-                .toString() + " " + listAplications!!.get(position).phone
-        )
-
+        holder.tvDepartureDate!!.setText(listAplications!!.get(position).departureDate.toString())
+        if(listAplications!!.get(position).returnDate != null){
+            holder.tvReturnDate!!.setText(listAplications!!.get(position).returnDate.toString())
+        }
+        else{
+            holder.tvReturnDate!!.setText("X")
+        }
+        holder.tvDuration!!.setText(listAplications!!.get(position).schedule.route.duration.toString())
+        holder.tvPrice!!.setText(listAplications!!.get(position).schedule.price.toString())
+        holder.tvDepartureTime!!.setText(listAplications!!.get(position).schedule.time.toString())
+        */
+        holder.render(list[position])
     }
 
     override fun getItemCount(): Int {
-        return listAplications!!.size
+        return list!!.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val vista = LayoutInflater.from(parent?.context).inflate(R.layout.item_flight, parent, false)
 
-        viewHolder = ViewHolder(vista, clickListener)
+        var viewHolder = ViewHolder(vista, clickListener)
 
         return viewHolder!!
     }
 
 
-    class ViewHolder(view: View, listener: ClickListener): RecyclerView.ViewHolder(view), View.OnClickListener{
-
+    class ViewHolder(val view: View, listener: ClickListener): RecyclerView.ViewHolder(view), View.OnClickListener{
+        /*
         var tvDestination: TextView? = null
         var tvPrice: TextView? = null
         var tvDuration: TextView? = null
-        var tvDeparture: TextView? = null
-
+        var tvDepartureTime: TextView? = null
+        var tvDepartureDate: TextView? = null
+        var tvReturnDate: TextView? = null
+        */
         var listener:ClickListener?= null
 
         init {
+            /*
             tvDestination = view.destination
             tvPrice = view.price
             tvDuration = view.duration
-            tvDeparture = view.departure
+            tvDepartureTime = view.departureTime
+            tvDepartureDate = view.departureDate
+            tvReturnDate = view.returnDate
 
+            */
             this.listener = listener
-
-            view.setOnClickListener(this)
-
         }
+
+        fun render(flight: Flight){
+            view.destination.text = flight.schedule.route.destination
+            view.price.text = flight.schedule.price.toString()
+            view.duration.text = flight.schedule.route.duration.toString()
+            view.departureTime.text = flight.schedule.time.toString()
+            view.departureDate.text = flight.departureDate.toString()
+            view.returnDate.text = flight.returnDate.toString()
+            view.setOnClickListener(this)
+            }
 
         override fun onClick(v: View?) {
             this.listener?.onClick(v!!, adapterPosition)
-            this.listener?.onLongClick(v!!, adapterPosition)
         }
-
-
     }
 
+    /*
     fun filter(list: ArrayList<Flight>?) {
         if (list != null) listAplications = list else listAplications = auxList
         notifyDataSetChanged()
     }
-
+    */
 
 }

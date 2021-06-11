@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment">
+    tools:context=".ui.home.HomeFragment"
+    android:background="@color/white">
 
     <EditText
         android:id="@+id/destinationTextField"
@@ -13,7 +14,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="28dp"
         android:ems="10"
-        android:text="Where to"
+        android:hint="Where To?"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,6 +24,8 @@
         android:layout_height="45dp"
         android:layout_marginStart="318dp"
         android:layout_marginTop="27dp"
+        app:icon="@drawable/ic_search_foreground"
+        app:iconSize="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

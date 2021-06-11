@@ -1,13 +1,13 @@
 package com.example.aerolineanj.data.model
 
-import java.sql.Date
+import java.time.LocalTime
 
 data class Schedule (
     var id: Int,
     var day: String,
-    var time: Date,
-    var price: Double,
-    var discount: Double,
+    var time: LocalTime,
+    var price: Int,
+    var discount: Int,
     var plane: Plane,
     var route: Route
 ){
