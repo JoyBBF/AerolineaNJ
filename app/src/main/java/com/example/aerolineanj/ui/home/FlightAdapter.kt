@@ -87,7 +87,13 @@ class FlightAdapter(val list: ArrayList<Flight>, var clickListener: ClickListene
             view.duration.text = flight.schedule.route.duration.toString()
             view.departureTime.text = flight.schedule.time.toString()
             view.departureDate.text = flight.departureDate.toString()
-            view.returnDate.text = flight.returnDate.toString()
+            if(flight.returnDate != null){
+                view.returnDate.text = flight.returnDate.toString()
+            }
+            else{
+                view.returnDate.text = "X"
+            }
+
             view.setOnClickListener(this)
             }
 
