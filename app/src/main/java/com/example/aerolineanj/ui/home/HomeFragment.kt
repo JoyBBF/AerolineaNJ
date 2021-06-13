@@ -4,16 +4,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresPermission
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aerolineanj.ClickListener
 import com.example.aerolineanj.R
 import com.example.aerolineanj.data.model.*
 import com.example.aerolineanj.databinding.FragmentHomeBinding
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_home.*
+import org.w3c.dom.Text
 import java.sql.Date
 import java.time.LocalTime
 
@@ -27,6 +36,7 @@ class HomeFragment : Fragment(), ClickListener {
     private val binding get() = _binding!!
 
     private var recyclerView : RecyclerView? = null
+    var navController : NavController? = null
 
     //---------DATA---------
     var users : List<User> = listOf(
@@ -80,12 +90,6 @@ class HomeFragment : Fragment(), ClickListener {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        /*
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        */
 
         return root
     }
@@ -95,9 +99,17 @@ class HomeFragment : Fragment(), ClickListener {
         _binding = null
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initRecycler()
+        view?.findViewById<Button>(R.id.searchButton)?.setOnClickListener {
+            filterSearch()
+        }
     }
 
     fun initRecycler(){
@@ -108,13 +120,18 @@ class HomeFragment : Fragment(), ClickListener {
         recyclerView?.adapter = flightAdapter
     }
 
-    override fun onClick(vista: View, position: Int) {
-        Toast.makeText(activity, "aaaaaa", Toast.LENGTH_SHORT)
-        print("Aaaaaaaaaaaaaaaaaaaaaaa")
+    fun filterSearch(){
+        var destination = view?.findViewById<EditText>(R.id.destinationTextField)?.text
+        var auxList = ArrayList<Flight>()
+        flights.filter { it.schedule.route.destination.contains(destination.toString()) }.forEach{auxList.add(it)}
+        recyclerView?.adapter = FlightAdapter(ArrayList(auxList), this)
     }
 
-    override fun onItemClick(position: Int) {
-        //Toast.makeText(activity, flights[position].schedule.route.destination, Toast.LENGTH_SHORT)
+    override fun onClick(vista: View, position: Int) {
+        var parameter = Gson().toJson(flights[position])
+        val bundle = bundleOf("flight" to parameter)
+        bundle.putInt("cuantity", 3)
+        navController?.navigate(R.id.action_nav_home_to_reservationFragment, bundle)
     }
 
 }
