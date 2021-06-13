@@ -4,10 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.RequiresPermission
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -102,6 +99,12 @@ class HomeFragment : Fragment(), ClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
+
+        var numberPicker = view.findViewById(R.id.numberPicker) as NumberPicker
+        numberPicker.minValue = 1
+        numberPicker.maxValue = 10
+        numberPicker.value = 1
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -128,9 +131,9 @@ class HomeFragment : Fragment(), ClickListener {
     }
 
     override fun onClick(vista: View, position: Int) {
-        var parameter = Gson().toJson(flights[position])
+        var parameter = Gson().toJson(flights[position]) as String
         val bundle = bundleOf("flight" to parameter)
-        bundle.putInt("cuantity", 3)
+        bundle.putInt("cuantity", view?.findViewById<NumberPicker>(R.id.numberPicker)!!.value)
         navController?.navigate(R.id.action_nav_home_to_reservationFragment, bundle)
     }
 

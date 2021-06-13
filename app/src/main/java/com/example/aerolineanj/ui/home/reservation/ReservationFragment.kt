@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.GridLayout
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.navigation.Navigation
@@ -19,6 +20,8 @@ import com.example.aerolineanj.data.model.Flight
 import com.example.aerolineanj.data.model.Seat
 import com.example.aerolineanj.ui.home.FlightAdapter
 import com.google.gson.Gson
+import com.google.gson.JsonObject
+import kotlinx.android.synthetic.main.item_flight.*
 import kotlinx.android.synthetic.main.item_seat.view.*
 
 
@@ -27,6 +30,7 @@ class ReservationFragment : Fragment(), ClickListener{
     var seats : ArrayList<Seat>? = null
     var selectedSeats : ArrayList<Seat>? = null
     var cuantity : Int? = null
+    var flight : Flight? = null
 
     private var recyclerView : RecyclerView? = null
 
@@ -45,9 +49,10 @@ class ReservationFragment : Fragment(), ClickListener{
 
             }
         }
+        var a : JsonObject = Gson().fromJson(arguments?.getString("flight"), JsonObject::class.java)
         //flight = Gson().fromJson(arguments?.getString("flight"), Flight::class.java)
         cuantity = arguments?.getInt("cuantity")
-        Toast.makeText(activity, "Cuantity = "+cuantity, Toast.LENGTH_SHORT).show()
+        Toast.makeText(activity, cuantity.toString(), Toast.LENGTH_SHORT).show()
     }
 
     override fun onCreateView(
@@ -66,6 +71,11 @@ class ReservationFragment : Fragment(), ClickListener{
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initRecycler()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        view?.findViewById<TextView>(R.id.reservationTitle)?.text = "SELECT "+cuantity+" SEATS"
     }
 
     fun initRecycler(){

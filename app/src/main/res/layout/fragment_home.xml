@@ -9,7 +9,7 @@
 
     <EditText
         android:id="@+id/destinationTextField"
-        android:layout_width="267dp"
+        android:layout_width="247dp"
         android:layout_height="42dp"
         android:layout_marginStart="0dp"
         android:layout_marginTop="18dp"
@@ -18,23 +18,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/cuantityFld"
-        android:layout_width="65dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="275dp"
-        android:layout_marginTop="18dp"
-        android:ems="10"
-        android:hint="Seats"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="78dp"
+        android:layout_marginStart="245dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Persons:"/>
+        <NumberPicker
+            android:id="@+id/numberPicker"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
+
 
 
     <Button
         android:id="@+id/searchButton"
         android:layout_width="58dp"
         android:layout_height="45dp"
-        android:layout_marginStart="348dp"
+        android:layout_marginStart="328dp"
         android:layout_marginTop="18dp"
         app:icon="@drawable/ic_search_foreground"
         app:iconSize="50dp"
@@ -43,7 +52,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="652dp"
+        android:layout_height="612dp"
         android:layout_marginTop="78dp"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
