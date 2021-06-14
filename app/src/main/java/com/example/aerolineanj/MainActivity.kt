@@ -13,16 +13,19 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.commit
-import androidx.navigation.fragment.NavHostFragment
 import com.example.aerolineanj.databinding.ActivityMainBinding
-import com.example.aerolineanj.ui.Profile.GalleryFragment
+import com.example.aerolineanj.ui.Profile.ProfileFragment
 import com.example.aerolineanj.ui.home.HomeFragment
 import com.example.aerolineanj.ui.login.LoginActivity
-import com.example.aerolineanj.ui.slideshow.SlideshowFragment
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_main.*
+import com.example.aerolineanj.ui.history.HistoryFragment
+
+/*
+    LAB 04 - Diseño y programacion de plataformas moviles
+
+    Natalia Solano - Joy Bonilla
+    Grupo 10am
+
+ */
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -30,8 +33,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var binding: ActivityMainBinding
 
     private var homeFragment: HomeFragment = HomeFragment()
-    private var galleryFragment: GalleryFragment = GalleryFragment()
-    private var slideshowFragment: SlideshowFragment = SlideshowFragment()
+    private var profileFragment: ProfileFragment = ProfileFragment()
+    private var historyFragment: HistoryFragment = HistoryFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,10 +81,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment_content_main, homeFragment).commit()
             }
             R.id.nav_gallery -> {
-                supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment_content_main, galleryFragment).commit()
+                supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment_content_main, profileFragment).commit()
             }
             R.id.nav_slideshow -> {
-                supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment_content_main, slideshowFragment).commit()
+                supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment_content_main, historyFragment).commit()
             }
             R.id.nav_logout -> {
                 var intent = Intent(this, LoginActivity::class.java)

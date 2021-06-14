@@ -21,15 +21,15 @@
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.example.aerolineanj.ui.Profile.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/activity_profile" />
+        android:name="com.example.aerolineanj.ui.Profile.ProfileFragment"
+        android:label="@string/menu_profile"
+        tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.example.aerolineanj.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:name="com.example.aerolineanj.ui.history.HistoryFragment"
+        android:label="@string/menu_history"
+        tools:layout="@layout/fragment_history" />
     <fragment
         android:id="@+id/reservationFragment"
         android:name="com.example.aerolineanj.ui.home.reservation.ReservationFragment"

@@ -8,8 +8,8 @@
     <string name="action_settings">Settings</string>
 
     <string name="menu_home">Home</string>
-    <string name="menu_profile">Perfil</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_profile">Profile</string>
+    <string name="menu_history">Flight History</string>
 
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
