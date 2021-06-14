@@ -1,5 +1,6 @@
 package com.example.aerolineanj.data.model
 
+import java.io.Serializable
 import java.time.LocalTime
 
 data class Schedule (
@@ -10,6 +11,4 @@ data class Schedule (
     var discount: Int,
     var plane: Plane,
     var route: Route
-){
-
-}
+    ) : Serializable

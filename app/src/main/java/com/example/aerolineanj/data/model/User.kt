@@ -1,5 +1,6 @@
 package com.example.aerolineanj.data.model
 
+import java.io.Serializable
 import java.sql.Date
 
 data class User (
@@ -14,4 +15,4 @@ data class User (
     var cellPhone: Int,
     var direction: String,
     var type: Int
-        )
+    ) : Serializable

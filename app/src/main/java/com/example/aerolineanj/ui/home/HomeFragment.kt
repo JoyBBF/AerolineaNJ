@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.annotation.RequiresPermission
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -18,8 +17,6 @@ import com.example.aerolineanj.R
 import com.example.aerolineanj.data.model.*
 import com.example.aerolineanj.databinding.FragmentHomeBinding
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.fragment_home.*
-import org.w3c.dom.Text
 import java.sql.Date
 import java.time.LocalTime
 
@@ -118,7 +115,6 @@ class HomeFragment : Fragment(), ClickListener {
     fun initRecycler(){
         recyclerView = view?.findViewById(R.id.flightsRecyclerView)
         recyclerView?.layoutManager = LinearLayoutManager(activity)
-        //flightsRecyclerView.layoutManager = LinearLayoutManager(this.activity)
         var flightAdapter = FlightAdapter(ArrayList(flights), this)
         recyclerView?.adapter = flightAdapter
     }
@@ -134,6 +130,7 @@ class HomeFragment : Fragment(), ClickListener {
         var parameter = Gson().toJson(flights[position]) as String
         val bundle = bundleOf("flight" to parameter)
         bundle.putInt("cuantity", view?.findViewById<NumberPicker>(R.id.numberPicker)!!.value)
+        bundle.putString("time", flights[position].schedule.time.toString())
         navController?.navigate(R.id.action_nav_home_to_reservationFragment, bundle)
     }
 

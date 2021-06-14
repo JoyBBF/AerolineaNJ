@@ -5,20 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.GridLayout
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aerolineanj.ClickListener
 import com.example.aerolineanj.R
-import com.example.aerolineanj.data.model.Flight
 import com.example.aerolineanj.data.model.Seat
-import com.example.aerolineanj.ui.home.FlightAdapter
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.item_flight.*
@@ -30,7 +25,7 @@ class ReservationFragment : Fragment(), ClickListener{
     var seats : ArrayList<Seat>? = null
     var selectedSeats : ArrayList<Seat>? = null
     var cuantity : Int? = null
-    var flight : Flight? = null
+    var flight : JsonObject? = null
 
     private var recyclerView : RecyclerView? = null
 
@@ -49,8 +44,7 @@ class ReservationFragment : Fragment(), ClickListener{
 
             }
         }
-        var a : JsonObject = Gson().fromJson(arguments?.getString("flight"), JsonObject::class.java)
-        //flight = Gson().fromJson(arguments?.getString("flight"), Flight::class.java)
+        flight = Gson().fromJson(arguments?.getString("flight"), JsonObject::class.java)
         cuantity = arguments?.getInt("cuantity")
         Toast.makeText(activity, cuantity.toString(), Toast.LENGTH_SHORT).show()
     }
@@ -96,7 +90,10 @@ class ReservationFragment : Fragment(), ClickListener{
                 v?.seatBtn?.setColorFilter(ContextCompat.getColor(v.context, R.color.seatGreen))
                 selectedSeats!!.add(seats!![position])
                 if(selectedSeats!!.size == cuantity){
-                    Navigation.findNavController(requireView())?.navigate(R.id.action_reservationFragment_to_confirmPucharseFragment)
+                    val bundle = bundleOf("flight" to Gson().toJson(flight))
+                    bundle.putString("seats", Gson().toJson(selectedSeats))
+                    bundle.putString("time", arguments?.getString("time"))
+                    Navigation.findNavController(requireView())?.navigate(R.id.action_reservationFragment_to_confirmPucharseFragment, bundle)
                 }
             }
         }
