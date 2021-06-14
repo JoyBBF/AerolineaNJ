@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -18,7 +17,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import androidx.navigation.fragment.NavHostFragment
 import com.example.aerolineanj.databinding.ActivityMainBinding
-import com.example.aerolineanj.ui.gallery.GalleryFragment
+import com.example.aerolineanj.ui.Profile.GalleryFragment
 import com.example.aerolineanj.ui.home.HomeFragment
 import com.example.aerolineanj.ui.login.LoginActivity
 import com.example.aerolineanj.ui.slideshow.SlideshowFragment

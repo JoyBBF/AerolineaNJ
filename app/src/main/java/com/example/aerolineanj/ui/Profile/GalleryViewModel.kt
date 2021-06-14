@@ -1,4 +1,4 @@
-package com.example.aerolineanj.ui.gallery
+package com.example.aerolineanj.ui.Profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

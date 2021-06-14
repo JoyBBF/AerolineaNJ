@@ -1,4 +1,4 @@
-package com.example.aerolineanj.ui.gallery
+package com.example.aerolineanj.ui.Profile
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.aerolineanj.R
 import com.example.aerolineanj.databinding.FragmentGalleryBinding
 
 class GalleryFragment : Fragment() {

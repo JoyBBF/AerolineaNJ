@@ -18,6 +18,7 @@ import android.widget.Toast
 import com.example.aerolineanj.MainActivity
 
 import com.example.aerolineanj.R
+import com.example.aerolineanj.ui.signup.SignupActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -101,7 +102,8 @@ class LoginActivity : AppCompatActivity() {
             }
 
             login2.setOnClickListener {
-                Intent(this,  Signup::class.java)
+                var intent = Intent(context,  SignupActivity::class.java)
+                finish()
                 startActivity(intent)
             }
         }
